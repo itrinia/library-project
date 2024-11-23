@@ -1,0 +1,10 @@
+{% extends "library/base.html" %}
+
+{% block content %}
+  <h2>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Member</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">{% if form.instance.pk %}Save Changes{% else %}Add Member{% endif %}</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'library/base.html' %}
+
+{% block content %}
+<h2>Borrow Records</h2>
+
+<a href="{% url 'borrows_create' %}" class="btn btn-success mb-3">Add Borrow Record</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Book</th>
+            <th>Member</th>
+            <th>Borrow Date</th>
+            <th>Return Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for borrow in borrows %}
+        <tr>
+            <td>{{ borrow.id }}</td>
+            <td>{{ borrow.book.title }}</td>
+            <td>{{ borrow.member.name }}</td>
+            <td>{{ borrow.borrow_date }}</td>
+            <td>{{ borrow.return_date }}</td>
+            <td>
+                <a href="{% url 'borrows_edit' borrow.id %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'borrows_delete' borrow.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

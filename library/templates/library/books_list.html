@@ -1,0 +1,36 @@
+{% extends 'library/base.html' %}
+
+{% block content %}
+<h2>Categories</h2>
+
+<a href="{% url 'books_create' %}" class="btn btn-success mb-3">Add Book</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Categories</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.id }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>
+                {% for category in book.categories.all %}
+                    {{ category.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                <a href="{% url 'books_edit' book.id %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'books_delete' book.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

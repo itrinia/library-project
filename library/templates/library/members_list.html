@@ -1,0 +1,30 @@
+{% extends 'library/base.html' %}
+
+{% block content %}
+<h2>Members</h2>
+
+<a href="{% url 'members_create' %}" class="btn btn-success mb-3">Add Member</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for member in members %}
+        <tr>
+            <td>{{ member.id }}</td>
+            <td>{{ member.name }}</td>
+            <td>
+                <a href="{% url 'members_edit' member.id %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'members_delete' member.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
