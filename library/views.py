@@ -39,8 +39,10 @@ def books_edit(request, pk):
 # Delete 
 def books_delete(request, pk):
     book = get_object_or_404(Book, pk=pk)
-    book.delete()  
-    return redirect('books_list') 
+    if request.method == 'POST':
+        book.delete()
+        return redirect('books_list')
+    return render(request, 'library/books_confirm_delete.html', {'book': book})
 
 # ======CATEGORY LIST=====
 def categories_list(request):
@@ -70,8 +72,10 @@ def categories_edit(request, pk):
 
 def categories_delete(request, pk):
     category = get_object_or_404(Category, pk=pk)
-    category.delete()  
-    return redirect('categories_list')
+    if request.method == 'POST':
+        category.delete()
+        return redirect('categories_list')
+    return render(request, 'library/categories_confirm_delete.html', {'category': category})
 
 # ======MEMBER LIST=====
 def members_list(request):
@@ -101,8 +105,10 @@ def members_edit(request, pk):
 
 def members_delete(request, pk):
     member = get_object_or_404(Member, pk=pk)
-    member.delete()  
-    return redirect('members_list')
+    if request.method == 'POST':
+        member.delete()
+        return redirect('members_list')
+    return render(request, 'library/members_confirm_delete.html', {'member': member})
 
 
 # ======BORROW LIST=====
@@ -133,6 +139,8 @@ def borrows_edit(request, pk):
 
 def borrows_delete(request, pk):
     borrow = get_object_or_404(Borrow, pk=pk)
-    borrow.delete()  
-    return redirect('borrows_list')
+    if request.method == 'POST':
+        borrow.delete()
+        return redirect('borrows_list')
+    return render(request, 'library/borrows_confirm_delete.html', {'borrow': borrow})
     
